@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgres:16.1-alpine3.19
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./report_gen_relational_db_schema.sql:/docker-entrypoint-initdb.d/00_report_gen_relational_db_schema.sql
+      - ./test_scripts/1_source_link_insert.sql:/docker-entrypoint-initdb.d/1_source_link_insert.sql
+      - ./test_scripts/2_ioc_filter_insert.sql:/docker-entrypoint-initdb.d/2_ioc_filter_insert.sql
+      - ./test_scripts/3_stats_insert.sql:/docker-entrypoint-initdb.d/3_stats_insert.sql
+      - ./test_scripts/4_category_rules_insert.sql:/docker-entrypoint-initdb.d/4_category_rules_insert.sql
+    ports:
+      - "5432:5432" 
+
+  mongo:
+    image: mongo:7.0.5-jammy
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+        MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
+    volumes:
+      - ./report_gen_non_relational_validation_schema.js:/docker-entrypoint-initdb.d/00_report_gen_non_relational_validation_schema.js
+      - ./mongo_test_scripts/1_insert_model.sh:/docker-entrypoint-initdb.d/1_insert_model.sh
+      - ./mongo_test_scripts/ml_model.json:/docker-entrypoint-initdb.d/ml_model.json
+    ports:
+      - "27017:27017"
