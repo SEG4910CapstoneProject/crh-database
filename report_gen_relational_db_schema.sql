@@ -1,4 +1,18 @@
 -- CREATE tables
+
+-- Open CTI sources will be : alien vault + bleeping computer, no need for a source_link
+CREATE TABLE open_cti_sources (
+	source_ID 		SERIAL PRIMARY KEY,
+	source_name     VARCHAR(100)
+);
+
+-- This table is to keep track of all updates the system did
+CREATE TABLE versions (
+	version_id      SERIAL PRIMARY KEY,
+	time_update     TIMESTAMP WITH TIME ZONE
+);
+
+
 CREATE TABLE sources (
 	source_ID 		SERIAL PRIMARY KEY,
 	source_name     VARCHAR(100),
