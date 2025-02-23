@@ -11,6 +11,7 @@ services:
       - ./test_scripts/2_ioc_filter_insert.sql:/docker-entrypoint-initdb.d/2_ioc_filter_insert.sql
       - ./test_scripts/3_stats_insert.sql:/docker-entrypoint-initdb.d/3_stats_insert.sql
       - ./test_scripts/4_category_rules_insert.sql:/docker-entrypoint-initdb.d/4_category_rules_insert.sql
+      - ./test_scripts/5_open_cti_source_insert.sql:/docker-entrypoint-initdb.d/5_open_cti_source_insert.sql
     ports:
       - "5432:5432" 
 
