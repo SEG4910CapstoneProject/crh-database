@@ -2,7 +2,7 @@
 
 -- Open CTI sources will be : alien vault + bleeping computer, no need for a source_link
 CREATE TABLE open_cti_sources (
-	source_ID 		SERIAL PRIMARY KEY,
+	source_ID 		INT PRIMARY KEY,
 	source_name     VARCHAR(100)
 );
 
@@ -27,7 +27,9 @@ CREATE TABLE articles (
 	date_published 	DATE,
 	is_feature_ext	BOOLEAN DEFAULT false,
 	is_ML_ext		BOOLEAN DEFAULT false,
-	hashlink 		BIGINT
+	hashlink 		BIGINT,
+	FOREIGN KEY (source_ID) REFERENCES open_cti_sources(source_ID)
+
 );
 
 CREATE TABLE statistics (
