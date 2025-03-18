@@ -205,3 +205,5 @@ ON report (generate_date);
 
 CREATE INDEX index_ioc_source_filter_pattern_type
 ON ioc_source_filter_pattern (source_ID);
+
+ALTER TABLE ArticlesEntity ADD COLUMN view_count INT DEFAULT 0;
