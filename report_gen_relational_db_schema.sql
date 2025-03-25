@@ -206,4 +206,15 @@ ON report (generate_date);
 CREATE INDEX index_ioc_source_filter_pattern_type
 ON ioc_source_filter_pattern (source_ID);
 
-ALTER TABLE articles ADD COLUMN view_count INT DEFAULT 0;
+-- Monthly_articles table
+CREATE TABLE monthly_articles (
+    id SERIAL PRIMARY KEY,
+    article_id UUID NOT NULL REFERENCES articles(article_id) ON DELETE CASCADE,
+    date_published DATE NOT NULL,
+    view_count INT NOT NULL DEFAULT 0,
+    is_article_of_note BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE INDEX idx_monthly_articles_date ON monthly_articles(date_published);
+
+CREATE INDEX idx_article_of_note ON monthly_articles(is_article_of_note);
