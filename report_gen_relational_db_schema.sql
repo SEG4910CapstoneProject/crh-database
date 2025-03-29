@@ -212,7 +212,8 @@ CREATE TABLE monthly_articles (
     article_id UUID NOT NULL REFERENCES articles(article_id) ON DELETE CASCADE,
     date_published DATE NOT NULL,
     view_count INT NOT NULL DEFAULT 0,
-    is_article_of_note BOOLEAN NOT NULL DEFAULT FALSE
+    is_article_of_note BOOLEAN NOT NULL DEFAULT FALSE,
+	title TEXT
 );
 
 CREATE INDEX idx_monthly_articles_date ON monthly_articles(date_published);
