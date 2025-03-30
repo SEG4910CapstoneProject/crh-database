@@ -151,8 +151,8 @@ CREATE TABLE report_articles (
 	article_rank SMALLINT,
 	suggestion BOOLEAN NOT NULL,
 	PRIMARY KEY (report_id, article_id),
-	FOREIGN KEY (article_ID) REFERENCES articles(article_ID),
-	FOREIGN KEY (report_id) REFERENCES report(report_id)
+	FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE,
+    FOREIGN KEY (report_id) REFERENCES report(report_id) ON DELETE CASCADE
 );
 
 CREATE TABLE report_statistics (
@@ -160,7 +160,7 @@ CREATE TABLE report_statistics (
 	statistic_id UUID,
 	suggestion BOOLEAN NOT NULL,
 	PRIMARY KEY (report_id, statistic_id),
-	FOREIGN KEY (report_id) REFERENCES report(report_id),
+	FOREIGN KEY (report_id) REFERENCES report(report_id) ON DELETE CASCADE,
 	FOREIGN KEY (statistic_id) REFERENCES statistics(statistic_ID)
 );
 
@@ -174,14 +174,14 @@ CREATE TABLE category_rule (
 	category_rank INTEGER PRIMARY KEY,
 	category_regex TEXT,
 	category_id INTEGER,
-	FOREIGN KEY (category_id) REFERENCES category(category_id)
+    FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE
 );
 
 CREATE TABLE article_category (
 	category_id SERIAL,
 	article_id UUID,
 	PRIMARY KEY (category_id, article_id),
-	FOREIGN KEY (article_ID) REFERENCES articles(article_ID),
+    FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE,
 	FOREIGN KEY (category_id) REFERENCES category(category_id)
 );
 
