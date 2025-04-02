@@ -140,7 +140,8 @@ CREATE TABLE report (
 	generate_date TIMESTAMP,
 	report_type ReportType,
 	last_modified TIMESTAMP,
-	email_status BOOLEAN DEFAULT false
+	email_status BOOLEAN DEFAULT false,
+	report_pdf BYTEA
 );
 
 -- Report - other table relations
