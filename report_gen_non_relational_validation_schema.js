@@ -27,6 +27,30 @@ db.createCollection("articleContent", {
       }
     }
   });
+
+db.createCollection("relatedLinkContent",{
+  validator: {
+    $jsonSchema: {
+      required:['id'],
+      properties: {
+        id: {
+          bsonType: 'binData',
+          description: '\'id\' must be binary data in uuid format and is required'
+        },
+        links: {
+          bsonType: "array",
+          items: {
+            bsonType: "string",
+            description: "Each link must be a string"
+          },
+          description: "Must be an array of strings"
+        }
+      }
+    }
+  }
+})
+
+
   
 db.getCollection("articleContent").createIndex({
 	_id: 1
