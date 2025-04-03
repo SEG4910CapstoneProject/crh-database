@@ -32,31 +32,35 @@ CREATE TABLE articles (
 
 );
 
-CREATE TABLE articles_relatedLinks (
-	article_ID			UUID PRIMARY KEY,
-	rel_link_id			INT NOT NULL PRIMARY KEY,
-	FOREIGN KEY (article_ID) REFERENCES articles(article_ID),
-	FOREIGN KEY (rel_link_id) REFERENCES related_links(rel_link_id)
-);
-
 CREATE TABLE related_links(
 	rel_link_id   		SERIAL PRIMARY KEY,
 	related_hash_link	BIGINT,
 	source_ID			INT NOT NULL,
 	FOREIGN KEY (source_ID) REFERENCES open_cti_sources(source_ID)	
-)
+);
+
+CREATE TABLE articles_related_links (
+	article_ID			UUID,
+	rel_link_id			INT NOT NULL,
+	PRIMARY KEY (article_ID, rel_link_id),
+	FOREIGN KEY (article_ID) REFERENCES articles(article_ID),
+	FOREIGN KEY (rel_link_id) REFERENCES related_links(rel_link_id)
+);
+
+
 
 CREATE TABLE labels(
 	label_id 			SERIAL PRIMARY KEY,
 	label_name			VARCHAR(200)
-)
+);
 
 CREATE TABLE article_labels(
-	article_id			UUID PRIMARY KEY,
-	label_id			int PRIMARY KEY,
+	article_id			UUID,
+	label_id			int,
+	Primary KEY (article_id,label_id),
 	FOREIGN KEY (article_id) REFERENCES articles(article_ID),
 	FOREIGN KEY (label_id)   REFERENCES labels(label_id)
-)
+);
 
 CREATE TABLE statistics (
 	statistic_ID 		UUID PRIMARY KEY,
