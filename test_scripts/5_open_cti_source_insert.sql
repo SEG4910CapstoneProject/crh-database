@@ -1,5 +1,5 @@
 INSERT INTO public.open_cti_sources(
-	source_name)
+	source_ID,source_name)
 	VALUES
-		('Bleeping Computer'),
-		('AlienVault');
+		(1,'Bleeping Computer'),
+		(2,'AlienVault');
