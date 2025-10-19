@@ -254,7 +254,7 @@ CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
-    role VARCHAR(50) NOT NULL CHECK (role IN ('admin', 'analyst', 'restricted_analyst')),
+    role VARCHAR(50) NOT NULL CHECK (role IN ('admin', 'analyst', 'restricted_analyst', 'user')),
     created_at TIMESTAMP DEFAULT NOW()
 );
 
@@ -271,7 +271,8 @@ INSERT INTO users (email, password_hash, role)
 VALUES
   ('admin@example.com', '$2a$12$qOJPeE2THKiy3GxAq1TQS.USq9VZO8MGIvJyldIvQpPO8gqP35VQi', 'admin'),
   ('analyst@example.com', '$2a$12$qOJPeE2THKiy3GxAq1TQS.USq9VZO8MGIvJyldIvQpPO8gqP35VQi', 'analyst'),
-  ('restricted@example.com', '$2a$12$qOJPeE2THKiy3GxAq1TQS.USq9VZO8MGIvJyldIvQpPO8gqP35VQi', 'restricted_analyst');
+  ('restricted@example.com', '$2a$12$qOJPeE2THKiy3GxAq1TQS.USq9VZO8MGIvJyldIvQpPO8gqP35VQi', 'restricted_analyst'),
+  ('user@example.com', '$2a$12$qOJPeE2THKiy3GxAq1TQS.USq9VZO8MGIvJyldIvQpPO8gqP35VQi', 'user');
 
 
 CREATE INDEX idx_monthly_articles_date ON monthly_articles(date_published);
