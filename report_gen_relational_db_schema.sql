@@ -231,7 +231,7 @@ CREATE TABLE article_category (
 CREATE TABLE article_type (
     article_id UUID PRIMARY KEY,
     article_type VARCHAR(255),
-    FOREIGN KEY (article_id) REFERENCES articles(article_id)
+    FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE
 );
 
 -- Index 
