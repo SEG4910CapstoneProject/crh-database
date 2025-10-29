@@ -163,8 +163,15 @@ INSERT INTO ioc_types (name) VALUES
 -- Generated Reports
 
 CREATE TYPE ReportType AS ENUM (
+	'notSpecified',
 	'daily',
-	'weekly'
+	'weekly',
+	'monthly'
+);
+
+CREATE TYPE EmailTemplateType AS ENUM (
+	'restricted',
+	'nonRestricted'
 );
 
 CREATE TABLE report (
@@ -173,7 +180,8 @@ CREATE TABLE report (
 	report_type ReportType,
 	last_modified TIMESTAMP,
 	email_status BOOLEAN DEFAULT false,
-	report_pdf BYTEA
+	report_pdf BYTEA,
+	email_type EmailTemplateType NOT NULL
 );
 
 -- Report - other table relations
