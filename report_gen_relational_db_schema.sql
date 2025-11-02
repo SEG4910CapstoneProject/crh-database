@@ -286,3 +286,20 @@ VALUES
 CREATE INDEX idx_monthly_articles_date ON monthly_articles(date_published);
 
 CREATE INDEX idx_article_of_note ON monthly_articles(is_article_of_note);
+
+-- Table for storing user-created tags on the favourites page
+CREATE TABLE user_tags (
+    tag_id SERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    tag_name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    UNIQUE (user_id, tag_name)
+);
+
+-- Table linking user-created tags to articles (only favourite articles on the Favourites page)
+CREATE TABLE user_tag_articles (
+    tag_id INT NOT NULL REFERENCES user_tags(tag_id) ON DELETE CASCADE,
+    article_id UUID NOT NULL REFERENCES articles(article_id) ON DELETE CASCADE,
+    PRIMARY KEY (tag_id, article_id)
+);
+
