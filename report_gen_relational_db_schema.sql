@@ -86,7 +86,7 @@ CREATE TABLE ioc_articles (
 	article_ID 		UUID,
 	ioc_ID		INTEGER,
 	PRIMARY KEY (article_ID, ioc_ID),
-	FOREIGN KEY (article_ID) REFERENCES articles(article_ID),
+	FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE,
 	FOREIGN KEY (ioc_ID) REFERENCES iocs(ioc_ID)
 );
 
